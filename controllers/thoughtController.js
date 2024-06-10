@@ -73,7 +73,7 @@ module.exports = {
         }
     },
 
-    async postReaction(req, res) {
+    async createReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
