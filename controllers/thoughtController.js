@@ -26,7 +26,7 @@ module.exports = {
         try{
             const thought = await Thought.create(req.body)
             const user = await User.findOneAndUpdate(
-                { _id: req.body.userId },
+                { username: req.body.username },
                 { $addToSet: { thoughts: thought._id }},
                 {new: true}
             );
@@ -75,6 +75,10 @@ module.exports = {
 
     async createReaction(req, res) {
         try {
+            const newReaction = {               
+                reactionBody: req.body.reactionBody,
+                username: req.body.username
+              };
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
                 { $addToSet: { reactions: newReaction } },
